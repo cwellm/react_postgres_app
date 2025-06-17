@@ -1,0 +1,45 @@
+.btn {
+    font-size: 14px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.modify-btn {
+    color: #2563eb;
+}
+
+.modify-btn:hover {
+    text-decoration: underline;
+}
+
+.delete-btn {
+    color: #dc2626;
+}
+
+.delete-btn:hover {
+    text-decoration: underline;
+}
+
+.add-btn {
+    border: solid;
+    border-radius: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;       /* Ideal size for readability */
+    font-weight: 900;      /* Semi-bold, good for emphasis */
+    letter-spacing: 1.2px; /* Slight spacing for a cleaner look */
+    text-transform: uppercase;
+    padding: 5px 5px;
+    height: 40px;
+    line-height: 20px;
+    vertical-align: middle;
+    display: inline-block;
+    box-sizing: border-box;
+    align-items: flex-end;
+}
+
+.add-btn:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0.5, 0.5);
+
+}

@@ -1,0 +1,12 @@
+.generic-list-view {
+    padding: 16px;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+    text-align: left;
+}
+
+.generic-list-view:hover {
+    background: #f7f7f7;
+}

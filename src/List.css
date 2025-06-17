@@ -1,0 +1,61 @@
+.item-card {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    padding: 16px;
+    margin-bottom: 16px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.2s ease;
+}
+
+.item-line {
+    display: flex;
+    margin-bottom: 4px;
+}
+
+.item-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0.5, 0.5);
+}
+
+.item-left {
+    flex-grow: 1;
+}
+
+.item-title {
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.item-details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.item-details li {
+    margin-bottom: 4px;
+}
+
+.item-key {
+    width: 120px; /* fixed width ensures alignment */
+    font-weight: 600;
+    color: #444;
+}
+
+.item-value {
+    flex: 1;
+    color: #111;
+}
+
+.item-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 16px;
+    gap: 8px;
+}

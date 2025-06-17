@@ -1,0 +1,10 @@
+.address-and-audio-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.content-list-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 30px 0px;
+}
