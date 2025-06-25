@@ -1,0 +1,41 @@
+services:
+
+  db:
+    image: postgres:local
+    restart: always
+    # set shared memory limit when using docker compose
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    #volumes:
+    #  - type: tmpfs
+    #    target: /dev/shm
+    #    tmpfs:
+    #      size: 134217728 # 128*2^20 bytes = 128Mb
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "8888:5432"
+  rest_server:
+    image: postgrest/postgrest:v13.0.4@sha256:4b81ca24ee9ed77a7ce7a4935f386f3d9b0455e8026133bc92d52ec71696f9e3
+    environment:
+      PGRST_DB_URI: postgres://react_robot:mysecurepassword@db:5432/react_app
+      PGRST_OPENAPI_SERVER_PROXY_URI: http://127.0.0.1:3001
+      PGRST_DB_ANON_ROLE: react_robot
+      PGRST_DB_SCHEMAS: api
+    ports:
+      - "3001:3000"
+    depends_on:
+      - db
+  swagger:
+    image: swaggerapi/swagger-ui:v5.25.2@sha256:1b7a77ba785f3e36f8a7ed831e0d6ec9ac469ae3d46a7e25080f8664b4932a34
+    ports:
+      - "8085:8080"
+    expose:
+      - "8080"
+    environment:
+      API_URL: http://localhost:3001/
+
+volumes:
+  pgdata:
