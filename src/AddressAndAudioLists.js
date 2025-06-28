@@ -5,25 +5,41 @@ import React from "react";
 
 import { useNavigate } from 'react-router';
 
+import 'devextreme/dist/css/dx.light.css';
+import Button from 'devextreme-react/button';
+
+
 
 function AddressAndAudioLists(itemListRefreshKey) {
     const navigate = useNavigate();
     return (
-        <div className="address-and-audio-list">
-            <div id="address-list" className="content-lists">
-                <div className="content-list-header">
-                    <h2>Address List</h2>
-                    <button className="btn add-btn" onClick={() => {navigate("/form_addresses");}}>Add Address</button>
-                </div>
-                <GenericListView itemListRefreshKey={itemListRefreshKey} datapoint="a"/>
+        <div className="mainAppBody" id="mainAppBody">
+            <div id="navigateToDashboardFromMainAppBody">
+                <Button
+                    text="Analytics Dashboard"
+                    onClick={() => {
+                        navigate("/analytics-dashboard");
+                    }}
+                    stylingMode="contained"
+                    icon="isblank"
+                />
             </div>
-            <div id="audio-list" className="content-lists">
-                <div className="content-list-header">
-                    <h2>Music List</h2>
-                    <button className="btn add-btn" onClick={() => {navigate("/form_music");}}>Add Music</button>
-
+            <div className="address-and-audio-list">
+                <div id="address-list" className="content-lists">
+                    <div className="content-list-header">
+                        <h2>Address List</h2>
+                        <button className="btn add-btn" onClick={() => {navigate("/form_addresses");}}>Add Address</button>
+                    </div>
+                    <GenericListView itemListRefreshKey={itemListRefreshKey} datapoint="a"/>
                 </div>
-                <GenericListView itemListRefreshKey={itemListRefreshKey} datapoint="a"/>
+                <div id="audio-list" className="content-lists">
+                    <div className="content-list-header">
+                        <h2>Music List</h2>
+                        <button className="btn add-btn" onClick={() => {navigate("/form_music");}}>Add Music</button>
+
+                    </div>
+                    <GenericListView itemListRefreshKey={itemListRefreshKey} datapoint="a"/>
+                </div>
             </div>
         </div>
     )

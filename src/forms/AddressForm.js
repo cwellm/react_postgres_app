@@ -1,6 +1,34 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 import './FormPage.css';
 import { useNavigate } from 'react-router';
+
+async function fetchAllCountryCodes() {
+    return fetch('http://localhost:3001/rpc/get_all_country_codes_iso3', {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+    }).then(res => {
+        if (res.status !== 200) return null;
+        return res.json();
+    }).catch((err) => {
+        alert(`Error fetching country codes: ${err}`);
+        return null;
+    });
+}
+
+function validateFormData(formData, countrySuggestions) {
+
+    if (!("country" in formData)) {
+        alert("Country not found in form data");
+        throw Error("Country not found in form data");
+    }
+    if (!(countrySuggestions.includes(formData.country))) {
+        alert(`Please provide a valid country code. You got ${formData.country} but may be ${countrySuggestions}`);
+        throw Error("Please enter a valid country code!");
+    }
+}
 
 export default function AddressForm() {
     const navigate = useNavigate();
@@ -15,26 +43,37 @@ export default function AddressForm() {
         email: '',
         telephone: '',
     });
+    const [countrySuggestions, setCountrySuggestions] = useState([]);
+    const [countryInputValue, setCountryInputValue] = useState('');
+
+    useEffect(() => {
+        const loadCountryCodeSuggestions = async () => {
+            const countrySuggestions = await fetchAllCountryCodes();
+            if (countrySuggestions) setCountrySuggestions(countrySuggestions);
+        }
+        loadCountryCodeSuggestions();
+    }, []);
+
+    // filter based on input
+    const filteredCountrySuggestions = useMemo(() => {
+        const query = countryInputValue.toLowerCase().trim();
+        if (!query) return [];
+        return countrySuggestions
+            .filter(code => code.toLowerCase().includes(query))
+            .slice(0, 20);
+    }, [countryInputValue, countrySuggestions]);
 
     const handleChangeDefault = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    function handleChangeStreet(e) {
-        const {name, value} = e.target;
-        if (name !== "street") {
-            return;
-        }
-        setFormData({name: value});
-        //alert("Changed street.");
-    }
-
-    function handleSubmitStreet(e) {
-        alert("Now submitting...");
+    function handleCountryInput(event) {
+        setCountryInputValue(event.target.value);
     }
 
     const handleSubmit = (e) => {
+        validateFormData(formData, countrySuggestions);
         e.preventDefault();
         fetch('http://localhost:3001/rpc/add_address', {
             method: 'POST',
@@ -157,9 +196,46 @@ curl -X 'POST' \
                         name="country"
                         value={formData.country}
                         onChange={handleChangeDefault}
+                        onInput={(event) => handleCountryInput(event)}
+                        pattern="[A-Z]{3}"
+                        placeholder="3 letter country code"
+                        autoComplete="off"
                     />
                 </label>
-
+                {filteredCountrySuggestions.length > 0 && (
+                    <div id="countryCodeSuggestionsBox"
+                        style={{
+                            position: 'inherit',
+                            top: '100%',
+                            left: 0,
+                            right: 0,
+                            backgroundColor: 'white',
+                            border: '1px solid #ccc',
+                            zIndex: 1000,
+                            maxHeight: '200px',
+                            maxWidth: '200px',
+                            overflowY: 'auto',
+                        }}
+                    >
+                        {filteredCountrySuggestions.map((code, index) => (
+                            <div
+                                key={index}
+                                onClick={() => {
+                                    setCountryInputValue(code);
+                                    formData.country = code;
+                                    document.getElementById('countryCodeSuggestionsBox').style.visibility = 'hidden';
+                                }}
+                                style={{
+                                    padding: '8px',
+                                    cursor: 'pointer',
+                                    borderBottom: '1px solid #eee',
+                                }}
+                            >
+                                {code}
+                            </div>
+                        ))}
+                    </div>
+                )}
                 <label>
                     E-Mail
                     <input

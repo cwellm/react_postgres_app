@@ -1,0 +1,1 @@
+ALTER TABLE user_stored_addresses  ADD CONSTRAINT country_iso3 FOREIGN KEY (country) REFERENCES country_codes(iso3);

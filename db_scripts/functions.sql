@@ -51,3 +51,17 @@ CREATE OR REPLACE FUNCTION api.delete_address(JSON) RETURNS VOID
         DELETE FROM public.user_stored_addresses WHERE id = ($1->>'id')::bigint;
        END;
        $$ LANGUAGE plpgsql
+
+DROP FUNCTION IF EXISTS api.get_all_country_codes_iso3;
+CREATE OR REPLACE FUNCTION api.get_all_country_codes_iso3()
+       RETURNS SETOF public.country_codes.iso3%TYPE
+       AS $$
+       BEGIN
+       RETURN QUERY
+        SELECT iso3 FROM public.country_codes;
+        IF NOT FOUND THEN
+           RAISE EXCEPTION 'No countries found';
+        END IF;
+           RETURN;
+       END;
+       $$ LANGUAGE plpgsql

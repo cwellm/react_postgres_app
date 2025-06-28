@@ -40,3 +40,11 @@ telephone VARCHAR(70)
 user_id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL
 username VARCHAR(50) NOT NULL,
 password_md5 CHAR(32)
+
+**table name: user_stored_music**
+*fields*:
+id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
+user_id bigint references app_users(user_id) NOT NULL,
+interpreter VARCHAR(100) NOT NULL,
+musical_piece_name VARCHAR(100) NOT NULL,
+music_link TEXT
