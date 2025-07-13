@@ -3,9 +3,6 @@ import 'devextreme/dist/css/dx.light.css';
 
 import React, {useState, useEffect} from 'react';
 import PieChart, {Label, Series, Tooltip} from 'devextreme-react/pie-chart';
-import Button from 'devextreme-react/button';
-
-import { useNavigate } from 'react-router';
 
 async function fetchCountryAnalyticsData(){
     return fetch('http://localhost:3001/rpc/get_total_country_analytics_data', {
@@ -29,8 +26,6 @@ const customizeText = (countryData) => {
 
 function CountryPieChart() {
     const [countryAnalyticsData, setCountryAnalyticsData] = useState(null);
-    const navigate = useNavigate();
-
     useEffect(() => {
         const loadCountryAnalyticsData = async () => {
             let countryAnalyticsData_ = await fetchCountryAnalyticsData();
@@ -41,14 +36,6 @@ function CountryPieChart() {
 
     return (
         <div>
-            <Button
-                text="Lists Overview"
-                onClick={() => {
-                    navigate("/");
-                }}
-                stylingMode="contained"
-                icon="isblank"
-            />
         <PieChart
             id = "country-pie-chart"
             type="doughnut"

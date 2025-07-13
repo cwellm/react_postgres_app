@@ -1,0 +1,40 @@
+.simple-ticker-card {
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem 1.25rem;
+  transition: box-shadow 0.2s ease;
+  display: inline-block;
+  min-width: 160px;
+
+  &:hover {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  }
+
+  .label {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+  }
+
+  .value {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #222;
+  }
+
+  // Optional dark mode
+  body.dark & {
+    background-color: #1f2937;
+    .label {
+      color: #aaa;
+    }
+    .value {
+      color: #fff;
+    }
+  }
+}
+
+.tickerCardParent {
+  display: inline;
+}
