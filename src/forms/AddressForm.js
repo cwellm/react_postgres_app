@@ -19,15 +19,18 @@ async function fetchAllCountryCodes() {
 }
 
 function validateFormData(formData, countrySuggestions) {
-
+    return true;
     if (!("country" in formData)) {
         alert("Country not found in form data");
-        throw Error("Country not found in form data");
+        return false;
+        // throw Error("Country not found in form data");
     }
     if (!(countrySuggestions.includes(formData.country))) {
         alert(`Please provide a valid country code. You got ${formData.country} but may be ${countrySuggestions}`);
-        throw Error("Please enter a valid country code!");
+        return false;
+        // throw Error("Please enter a valid country code!");
     }
+    return true;
 }
 
 export default function AddressForm() {
@@ -73,7 +76,11 @@ export default function AddressForm() {
     }
 
     const handleSubmit = (e) => {
-        validateFormData(formData, countrySuggestions);
+        e.preventDefault();
+        const mayBeSubmitted = validateFormData(formData, countrySuggestions);
+        if (!mayBeSubmitted) {
+            return;
+        }
         e.preventDefault();
         fetch('http://localhost:3001/rpc/add_address', {
             method: 'POST',
@@ -89,12 +96,15 @@ export default function AddressForm() {
             }
         ).then(
             (data) => {
-                alert("Data submitted successfully.");
+            if (data?.code === "23503") {
+                throw Error(`Validation failed on server side. Reason: ${data.details}`)
+            }
+            alert("Data submitted successfully.");
+            navigate("/");
             }
         ).catch((err) => {
-            alert("Error on submitting data. Aborting.");
+            alert(`Error on submitting data. Aborting. Reason: ${err}`);
         });
-        navigate("/");
         // you could navigate back to list here
 
 /*
@@ -130,6 +140,7 @@ curl -X 'POST' \
                         required
                         value={formData.firstName}
                         onChange={handleChangeDefault}
+                        className="required_input"
                     />
                 </label>
 
@@ -141,6 +152,7 @@ curl -X 'POST' \
                         required
                         value={formData.lastName}
                         onChange={handleChangeDefault}
+                        className="required_input"
                     />
                 </label>
 
@@ -153,6 +165,7 @@ curl -X 'POST' \
                         value={formData.street}
                         onChange={handleChangeDefault}
                         pattern="([a-zA-Z]{3,}|[a-zA-Z\s]{4,})"
+                        className="required_input"
                     />
                 </label>
 
@@ -164,6 +177,7 @@ curl -X 'POST' \
                         required
                         value={formData.houseNo}
                         onChange={handleChangeDefault}
+                        className="required_input"
                     />
                 </label>
 
@@ -175,6 +189,7 @@ curl -X 'POST' \
                         required
                         value={formData.postalCode}
                         onChange={handleChangeDefault}
+                        className="required_input"
                     />
                 </label>
 
@@ -186,6 +201,7 @@ curl -X 'POST' \
                         required
                         value={formData.city}
                         onChange={handleChangeDefault}
+                        className="required_input"
                     />
                 </label>
 
@@ -200,6 +216,7 @@ curl -X 'POST' \
                         pattern="[A-Z]{3}"
                         placeholder="3 letter country code"
                         autoComplete="off"
+                        className="optional_input"
                     />
                 </label>
                 {filteredCountrySuggestions.length > 0 && (
@@ -243,6 +260,7 @@ curl -X 'POST' \
                         name="email"
                         value={formData.email}
                         onChange={handleChangeDefault}
+                        className="optional_input"
                     />
                 </label>
 
@@ -253,6 +271,7 @@ curl -X 'POST' \
                         name="telephone"
                         value={formData.telephone}
                         onChange={handleChangeDefault}
+                        className="optional_input"
                     />
                 </label>
 

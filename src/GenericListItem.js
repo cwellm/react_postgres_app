@@ -4,8 +4,11 @@ import "./Buttons.css";
 
 import DeleteCancelOptions  from "./popups/DeleteCancel";
 
-export default function GenericListItem({ title, details, hiddenDetails, onModify, onDelete }) {
+export default function GenericListItem({ title, details, links, hiddenDetails, onModify, onDelete }) {
     const [confirmDelete, setConfirmDelete] = useState(false);
+    if (!links) {
+        links = [];
+    }
     return (
         <div className="item-card">
             {!confirmDelete ? (
@@ -17,6 +20,13 @@ export default function GenericListItem({ title, details, hiddenDetails, onModif
                         <li key={key} className="item-line">
                             <div className="item-key">{key}:</div>
                             <div className="item-val">{val}</div>
+                        </li>
+                    ))}
+                </ul>
+                <ul className="item-details">
+                    {links.map((link) => (
+                        <li className="item-line">
+                            <a href={link} target="_blank" rel="noopener noreferrer">Listen</a>
                         </li>
                     ))}
                 </ul>

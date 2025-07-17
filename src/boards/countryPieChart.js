@@ -1,8 +1,9 @@
 import 'devextreme/dist/css/dx.light.css';
+import "./analyticsDashboard.scss";
 
 
 import React, {useState, useEffect} from 'react';
-import PieChart, {Label, Series, Tooltip} from 'devextreme-react/pie-chart';
+import PieChart, {Label, Series, Tooltip, Legend} from 'devextreme-react/pie-chart';
 
 async function fetchCountryAnalyticsData(){
     return fetch('http://localhost:3001/rpc/get_total_country_analytics_data', {
@@ -35,7 +36,7 @@ function CountryPieChart() {
     }, []);
 
     return (
-        <div>
+        <div id="country-pie-chart">
         <PieChart
             id = "country-pie-chart"
             type="doughnut"
@@ -56,6 +57,13 @@ function CountryPieChart() {
                 enabled={true}
                 customizeTooltip={customizeTooltip}
             />
+            <Legend
+                orientation="vertical"
+                itemTextPosition="right"
+                horizontalAlignment="right"
+                verticalAlignment="top"
+                margin={0}
+                columnCount={2} />
         </PieChart>
         </div>
     );

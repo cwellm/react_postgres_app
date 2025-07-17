@@ -1,0 +1,76 @@
+.App-header {
+  min-height: 45vh;
+  display: block;
+}
+
+.App-logo {
+  max-width: 45%;
+  align-self: center;
+  margin-top: -50px;
+}
+
+#headerHeading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #205168FF;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #3e6e36;
+  padding-bottom: 8px;
+  text-align: center;
+}
+
+.box-item {
+  background-color: red;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-anim 10s infinite;
+  }
+}
+
+@keyframes App-logo-anim {
+  0%   {background-color:red; left:0px; top:0px;}
+  25%  {background-color:yellow; left:200px; top:0px;}
+  50%  {background-color:blue; left:200px; top:200px;}
+  75%  {background-color:green; left:0px; top:200px;}
+  100% {background-color:red; left:0px; top:0px;}
+}
+
+/*
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-anim 10s infinite;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+
+
+.App header {
+  text-align: center;
+
+}
+
+@keyframes App-logo-anim {
+  0%   {background-color:red; left:0px; top:0px;}
+  25%  {background-color:yellow; left:200px; top:0px;}
+  50%  {background-color:blue; left:200px; top:200px;}
+  75%  {background-color:green; left:0px; top:200px;}
+  100% {background-color:red; left:0px; top:0px;}
+}
+*/

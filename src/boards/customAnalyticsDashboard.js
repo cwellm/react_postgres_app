@@ -12,14 +12,6 @@ export default function CustomAnalyticsDashboard() {
     const navigate = useNavigate();
 
     return <div>
-        <Button
-            text="Lists Overview"
-            onClick={() => {
-                navigate("/");
-            }}
-            stylingMode="contained"
-            icon="isblank"
-        />
         <AddressNameLetterHistogram />
         <CountryPieChart />
         <MostFrequentEmailDomain />

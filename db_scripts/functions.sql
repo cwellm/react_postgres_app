@@ -51,6 +51,7 @@ CREATE OR REPLACE FUNCTION api.delete_address(JSON) RETURNS VOID
         DELETE FROM public.user_stored_addresses WHERE id = ($1->>'id')::bigint;
        END;
        $$ LANGUAGE plpgsql
+;
 
 DROP FUNCTION IF EXISTS api.get_all_country_codes_iso3;
 CREATE OR REPLACE FUNCTION api.get_all_country_codes_iso3()
@@ -65,3 +66,58 @@ CREATE OR REPLACE FUNCTION api.get_all_country_codes_iso3()
            RETURN;
        END;
        $$ LANGUAGE plpgsql
+;
+--- music stuff starting here
+
+DROP FUNCTION IF EXISTS api.get_all_music;
+CREATE OR REPLACE FUNCTION api.get_all_music()
+       RETURNS SETOF public.user_stored_music
+       AS $$
+BEGIN
+RETURN QUERY
+SELECT * FROM public.user_stored_music;
+IF NOT FOUND THEN
+                RAISE EXCEPTION 'No music found.';
+END IF;
+            RETURN;
+END;
+       $$ LANGUAGE plpgsql
+;
+
+DROP FUNCTION IF EXISTS api.get_music_by_user_id;
+CREATE OR REPLACE FUNCTION api.get_music_by_user_id(user_id INT)
+       RETURNS SETOF public.user_stored_music
+       AS $$
+BEGIN
+RETURN QUERY
+SELECT * FROM public.user_stored_music WHERE public.user_stored_music.user_id = $1;
+IF NOT FOUND THEN
+                RAISE EXCEPTION 'No music found for id $1.';
+END IF;
+            RETURN;
+END;
+       $$ LANGUAGE plpgsql
+;
+
+DROP FUNCTION IF EXISTS api.add_music;
+CREATE OR REPLACE FUNCTION api.add_music(JSON) RETURNS VOID
+       AS $$
+        DECLARE
+
+BEGIN
+INSERT INTO public.user_stored_music (user_id, interpreter, musical_piece_name, music_link)
+VALUES (1, $1->>'interpreter', $1->>'musical_piece_name', $1->>'music_link');
+END;
+       $$ LANGUAGE plpgsql
+;
+
+DROP FUNCTION IF EXISTS api.delete_music;
+CREATE OR REPLACE FUNCTION api.delete_music(JSON) RETURNS VOID
+       AS $$
+        DECLARE
+
+BEGIN
+DELETE FROM public.user_stored_music WHERE id = ($1->>'id')::bigint;
+END;
+       $$ LANGUAGE plpgsql
+;
