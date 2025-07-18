@@ -31,7 +31,7 @@ function App() {
         <div className="App-nav-div">
             <NavigationElement />
         </div>
-        <div className="AppBody">
+        <main className="AppBody">
                 <Routes>
                     <Route path="/" element={<AddressAndAudioLists itemListRefreshKey={itemListRefreshKey}/>} />
                     <Route path={"/form_addresses"} element={<FormContainer childForm={<AddressForm />} />} />
@@ -39,7 +39,7 @@ function App() {
                     {/*<Route path={"/dashboard"} element={<AnalyticsDashboard />} /> */}
                     <Route path={"/analytics-dashboard"} element={<CustomAnalyticsDashboard />} />
                 </Routes>
-        </div>
+        </main>
     </div>
   );
 }

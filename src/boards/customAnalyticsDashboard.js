@@ -9,8 +9,6 @@ import { useNavigate } from 'react-router';
 
 
 export default function CustomAnalyticsDashboard() {
-    const navigate = useNavigate();
-
     return <div>
         <AddressNameLetterHistogram />
         <CountryPieChart />
