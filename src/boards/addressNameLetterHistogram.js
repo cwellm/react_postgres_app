@@ -18,7 +18,7 @@ async function fetchLetterCountData(){
     });
 }
 
-function AddressNameLetterHistogram() {
+function AddressNameLetterHistogram(props) {
     const [letterCountData, setLetterCountData] = useState(null);
     useEffect(() => {
         const loadLetterCountData = async () => {
@@ -28,7 +28,7 @@ function AddressNameLetterHistogram() {
         loadLetterCountData();
     }, []);
     return (
-        <Chart id="chart" dataSource={letterCountData}>
+        <Chart dataSource={letterCountData} id={props.id}>
             <Series
                 valueField="cnt"
                 argumentField="letter"

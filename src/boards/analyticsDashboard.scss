@@ -1,3 +1,23 @@
 #country-pie-chart {
-  max-width: 75%;
+  //max-width: 75%;
+}
+
+#addressNameLetterHistogram {
+  height: 100%;
+}
+
+.analytics-dashboard-item {
+  height: 100%;
+  margin: 1% 0;
+}
+
+.analytics-dashboard-item-row {
+  width: 90%;
+  margin: 0 10%;
+}
+
+.tickerCards {
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
 }

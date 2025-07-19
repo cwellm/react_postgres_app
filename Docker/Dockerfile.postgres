@@ -1,0 +1,6 @@
+FROM postgres:17-bookworm@sha256:864779115ab663ff8da5f027bf28aaab83fe377298d537e2886164b4bb1f0595
+
+RUN apt update
+RUN apt install -y vim curl
+
+COPY Docker/pg_hba.conf "${PGDATA}"/pg_hba.conf
