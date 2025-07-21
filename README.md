@@ -1,50 +1,28 @@
 # react_postgres_app
 
-## React Components
+## Dependencies
 
-Not necessarily used, but see:
+You may either install [Docker](https://docs.docker.com/desktop/setup/install/windows-install/), or decide to have
+everything on the host system. This includes
 
-- https://reactcomponents.com/?type=components
-- https://js.devexpress.com/React/
-  - e.g.: https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/Gantt/Overview/MaterialBlueLight/
-  - getting: `npx -p devextreme-cli devextreme add devextreme-react`
+- a [postgres](https://www.postgresql.org/download/windows/) database
+- the [postgREST](https://docs.postgrest.org/en/v13/tutorials/tut0.html) server for a RESTful API to the Postgres database
 
-### Other stuff used or interesting to use
+Additionally, you need [npm](https://nodejs.org/en/download/) to be installed (independently of Docker).
 
-- tailwind CSS: https://tailwindcss.com/docs/installation/using-vite
-- scss (used by devextreme): https://sass-lang.com/
+## Starting the app
 
-## Docker
+### On the host
 
-- image names for local build: postgresXX:local
+- run your postgres server on port *8888*
+- restore the [dump](db_scripts/pg_dumpall.sql) to have the necessary users and tables available
+- start postgrest with the correct config: `postgrest Docker/postgrest.conf`
 
-## db structure:
+- `npm install`
+- `npm start`
 
-**table name: user_stored_addresses**
+### In Docker
 
-*fields*:
-id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
-user_id bigint references app_users(user_id) NOT NULL,
-first_name VARCHAR(50) NOT NULL,
-last_name VARCHAR(50) NOT NULL,
-street VARCHAR(60) NOT NULL,
-house_number INT NOT NULL,
-postal_code VARCHAR(10) NOT NULL,
-city VARCHAR(50) NOT NULL,
-country VARCHAR(50),
-email VARCHAR(100),
-telephone VARCHAR(70)
-
-**table name: app_users**
-*fields*:
-user_id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL
-username VARCHAR(50) NOT NULL,
-password_md5 CHAR(32)
-
-**table name: user_stored_music**
-*fields*:
-id bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY NOT NULL,
-user_id bigint references app_users(user_id) NOT NULL,
-interpreter VARCHAR(100) NOT NULL,
-musical_piece_name VARCHAR(100) NOT NULL,
-music_link TEXT
+- run the compose file: `docker compose -f Docker/compose.yml up -d`
+- `npm install`
+- `npm start`
