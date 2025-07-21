@@ -1,3 +1,5 @@
+import {API_URL} from "../config/config";
+
 const keyAddressesMap = {
     "last_name": "Last Name",
     "first_name": "First Name",
@@ -45,7 +47,7 @@ function structureInput(itemList) {
 }
 
 function onDeleteItem(itemId) {
-    fetch('http://localhost:3001/rpc/delete_address', {
+    fetch(`${API_URL}/rpc/delete_address`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -67,7 +69,7 @@ function onDeleteItem(itemId) {
 }
 
 function fetchData() {
-    return fetch("http://localhost:3001/rpc/get_all_addresses")
+    return fetch(`${API_URL}/rpc/get_all_addresses`)
         .then(response => {
             if (!response.ok) {
                 throw new Error("Error occurred when trying to fetch addresses.");

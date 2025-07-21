@@ -1,12 +1,13 @@
 import 'devextreme/dist/css/dx.light.css';
 import "./analyticsDashboard.scss";
 
+import {API_URL} from "../config/config";
 
 import React, {useState, useEffect} from 'react';
 import PieChart, {Label, Series, Tooltip, Legend} from 'devextreme-react/pie-chart';
 
 async function fetchCountryAnalyticsData(){
-    return fetch('http://localhost:3001/rpc/get_total_country_analytics_data', {
+    return fetch(`${API_URL}/rpc/get_total_country_analytics_data`, {
         method: 'GET',
         headers: {
             Accept: 'application/json',

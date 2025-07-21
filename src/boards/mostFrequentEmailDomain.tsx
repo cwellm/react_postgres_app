@@ -2,8 +2,11 @@ import React, {useEffect, useRef, useState} from 'react';
 // @ts-ignore
 import {SimpleTickerCard} from './TickerCard.js';
 
+// @ts-ignore
+import {API_URL} from "../config/config.js";
+
 async function fetchMostFrequentEmailDomain() {
-    return fetch('http://localhost:3001/rpc/get_most_frequent_email_domain', {
+    return fetch(`${API_URL}/rpc/get_most_frequent_email_domain`, {
         method: 'GET',
         headers: {
             Accept: 'application/json',

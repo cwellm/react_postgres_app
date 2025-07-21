@@ -2,8 +2,10 @@ import React, {useEffect, useState} from 'react';
 import { Chart, Series } from 'devextreme-react/chart';
 import {useNavigate} from "react-router";
 
+import {API_URL} from "../config/config";
+
 async function fetchLetterCountData(){
-    return fetch('http://localhost:3001/rpc/get_name_letter_statistics', {
+    return fetch(`${API_URL}/rpc/get_name_letter_statistics`, {
         method: 'GET',
         headers: {
             Accept: 'application/json',

@@ -2,8 +2,10 @@ import React, {useEffect, useState, useMemo} from 'react';
 import './FormPage.css';
 import { useNavigate } from 'react-router';
 
+import {API_URL} from "../config/config";
+
 async function fetchAllCountryCodes() {
-    return fetch('http://localhost:3001/rpc/get_all_country_codes_iso3', {
+    return fetch(`${API_URL}/rpc/get_all_country_codes_iso3`, {
         method: 'GET',
         headers: {
             Accept: 'application/json',
@@ -53,7 +55,7 @@ export default function MusicForm() {
             return;
         }
         e.preventDefault();
-        fetch('http://localhost:3001/rpc/add_music', {
+        fetch(`${API_URL}/rpc/add_music`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

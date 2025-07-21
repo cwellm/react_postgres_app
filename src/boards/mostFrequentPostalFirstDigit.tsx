@@ -4,13 +4,18 @@ import {SimpleTickerCard} from './TickerCard.js';
 
 import "./TickerCard.scss"
 
+// @ts-ignore
+import {API_URL} from "../config/config.js";
+
 type PostalRecord = {
     first_digit: string;
     cnt: number;
 };
 
+//const typedApiUrl: string = API_URL;
+
 async function fetchMostFrequentPostalFirst() {
-    return fetch('http://localhost:3001/rpc/get_most_frequent_first_digit_from_postal_code', {
+    return fetch(`${API_URL}/rpc/get_most_frequent_first_digit_from_postal_code`, {
         method: 'GET',
         headers: {
             Accept: 'application/json',
