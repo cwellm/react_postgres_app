@@ -1,7 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {SimpleTickerCard} from './TickerCard';
+// @ts-ignore
+import {SimpleTickerCard} from './TickerCard.js';
 
 import "./TickerCard.scss"
+
+type PostalRecord = {
+    first_digit: string;
+    cnt: number;
+};
 
 async function fetchMostFrequentPostalFirst() {
     return fetch('http://localhost:3001/rpc/get_most_frequent_first_digit_from_postal_code', {
@@ -20,7 +26,7 @@ async function fetchMostFrequentPostalFirst() {
 }
 
 export default function MostFrequentPostalFirstDigit() {
-    const [postalData, setPostalData] = useState(null);
+    const [postalData, setPostalData] = useState<PostalRecord[] | null>(null);
     useEffect(() => {
         const loadPostalData = async () => {
             let postalData_ = await fetchMostFrequentPostalFirst();

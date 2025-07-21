@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {SimpleTickerCard} from './TickerCard';
+// @ts-ignore
+import {SimpleTickerCard} from './TickerCard.js';
 
 async function fetchMostFrequentEmailDomain() {
     return fetch('http://localhost:3001/rpc/get_most_frequent_email_domain', {

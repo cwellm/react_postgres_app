@@ -1,7 +1,7 @@
 import AddressNameLetterHistogram from "./addressNameLetterHistogram";
 import CountryPieChart from "./countryPieChart";
-import MostFrequentEmailDomain from "./mostFrequentEmailDomain.tsx";
-import MostFrequentPostalFirstDigit from "./mostFrequentPostalFirstDigit.tsx";
+import MostFrequentEmailDomain from "./mostFrequentEmailDomain";
+import MostFrequentPostalFirstDigit from "./mostFrequentPostalFirstDigit";
 
 import Box, { Item } from 'devextreme-react/box';
 

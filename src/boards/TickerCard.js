@@ -1,4 +1,3 @@
-import React from 'react';
 import './TickerCard.scss';
 
 class SimpleTickerCardProps {

@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "^19.1.8",
     "devextreme-themebuilder": "24.2.6"
   }
 }
