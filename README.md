@@ -16,6 +16,7 @@ Additionally, you need [npm](https://nodejs.org/en/download/) to be installed (i
 
 - run your postgres server on port *8888*
 - restore the [dump](db_scripts/pg_dumpall.sql) to have the necessary users and tables available
+  - on Windows, the [Windows dump](db_scripts/dumpall_file_total_windows.sql) file is necessary - not that some checks, both for SQL and TypeScript, seem to be stricter here
 - start postgrest with the correct config: `postgrest Docker/postgrest.conf`
 
 - `npm install`
