@@ -1,0 +1,4 @@
+FROM postgrest:v13.0.4
+
+COPY Docker/postgrest.conf.render /etc/postgrest.conf
+CMD ["postgrest", "/etc/postgrest.conf"]

@@ -1,0 +1,5 @@
+db-uri=db-uri="postgresql://react_robot:grxq9ZXJVC0yLe91XP7B7X9YumBiQIBg@dpg-d1v602qdbo4c73f7moog-a.frankfurt-postgres.render.com/react_app"
+openapi-server-proxy-uri="http://127.0.0.1:3001"
+server-port="3001"
+db-anon-role="react_robot"
+db-schemas="api"
