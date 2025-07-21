@@ -1,4 +1,4 @@
-FROM postgrest:v13.0.4
+FROM postgrest/postgrest:v13.0.4@sha256:4b81ca24ee9ed77a7ce7a4935f386f3d9b0455e8026133bc92d52ec71696f9e3
 
 COPY Docker/postgrest.conf.render /etc/postgrest.conf
 CMD ["postgrest", "/etc/postgrest.conf"]
